@@ -1,12 +1,29 @@
 {
-  "name": "digishop",
-  "version": "1.0.0",
-  "description": "shopping app using MERN by AJAY",
-  "main": "backend/server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-frontend":"npm run start --prefix client"
-  },
-  "author": "Ajay",
-  "license": "ISC"
+   "name": "digishop",
+   "version": "1.0.0",
+   "description": "shopping app using MERN by AJAY",
+   "main": "backend/server.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "data:import": "node backend/seeder",
+      "data:destroy": "node backend/seeder -d",
+      "frontend": "npm run start --prefix client",
+      "backend": "nodemon backend/server.js --ignore /client/*",
+      "dev": "concurrently -n \"backend,frontend\" -c \"red,yellow\" \"npm run backend\" \"npm run frontend\""
+   },
+   "author": "Ajay",
+   "license": "ISC",
+   "type": "module",
+   "dependencies": {
+      "bcrypt": "^5.0.1",
+      "concurrently": "^6.2.0",
+      "cors": "^2.8.5",
+      "dotenv": "^10.0.0",
+      "express": "^4.17.1",
+      "express-async-handler": "^1.1.4",
+      "jsonwebtoken": "^8.5.1",
+      "mongoose": "^5.13.2",
+      "morgan": "^1.10.0",
+      "nodemon": "^2.0.10"
+   }
 }

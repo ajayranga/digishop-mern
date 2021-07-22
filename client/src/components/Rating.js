@@ -35,6 +35,7 @@ const Rating = ({ value, numReviews, color }) => {
       </DIV>
    );
 };
+Rating.defaultProps = { numReviews: 0, value: 0 };
 
 Rating.propTypes = {
    value: PropTypes.number.isRequired,
