@@ -5,7 +5,7 @@ import { logoutUser } from '../actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const Header = () => {
-   const { userInfo } = useSelector((state) => state.userLogin);
+   const { userInfo } = useSelector((state) => state.user);
    const dispatch = useDispatch();
    const logOutHandler = () => dispatch(logoutUser());
    return (
@@ -38,6 +38,23 @@ const Header = () => {
                               <i className="fas fa-user"></i> Sign In
                            </Nav.Link>
                         </LinkContainer>
+                     )}
+                     {userInfo && userInfo.role === 'admin' && (
+                        <NavDropdown
+                           id="adminMenu"
+                           title="Admin"
+                           variant="light"
+                        >
+                           <LinkContainer to="/admin/userList">
+                              <NavDropdown.Item>Users </NavDropdown.Item>
+                           </LinkContainer>
+                           <LinkContainer to="/admin/productList">
+                              <NavDropdown.Item>Products </NavDropdown.Item>
+                           </LinkContainer>
+                           <LinkContainer to="/admin/orderList">
+                              <NavDropdown.Item>Orders </NavDropdown.Item>
+                           </LinkContainer>
+                        </NavDropdown>
                      )}
                   </Nav>
                </Navbar.Collapse>

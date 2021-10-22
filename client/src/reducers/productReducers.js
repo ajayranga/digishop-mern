@@ -39,3 +39,49 @@ export const productFetchReducer = (
          return { ...state };
    }
 };
+
+export const productDeleteReducer = (
+   state = { loading: false, error: null },
+   action
+) => {
+   switch (action.type) {
+      case productConstants.PRODUCT_DELETE_REQUEST:
+         return { ...state, loading: true };
+      case productConstants.PRODUCT_DELETE_SUCCESS:
+         return { success: true, loading: false };
+      case productConstants.PRODUCT_DELETE_FAIL:
+         return {
+            ...state,
+            loading: false,
+            error: action.payload,
+         };
+      default:
+         return { ...state };
+   }
+};
+
+export const productCreateReducer = (
+   state = { loading: false, error: null },
+   action
+) => {
+   switch (action.type) {
+      case productConstants.PRODUCT_CREATE_REQUEST:
+         return { ...state, loading: true };
+      case productConstants.PRODUCT_CREATE_SUCCESS:
+         return {
+            success: true,
+            loading: false,
+            createdProduct: action.payload,
+         };
+      case productConstants.PRODUCT_CREATE_FAIL:
+         return {
+            ...state,
+            loading: false,
+            error: action.payload,
+         };
+      case productConstants.PRODUCT_CREATE_RESET:
+         return { loading: false, error: null };
+      default:
+         return { ...state };
+   }
+};

@@ -45,9 +45,7 @@ const RegisterScreen = () => {
       message: null,
    };
    const [state, dispatchLocal] = useReducer(reducer, initialState);
-   const { userInfo, loading, error } = useSelector(
-      (state) => state.userRegister
-   );
+   const { userInfo, loading, error } = useSelector((state) => state.user);
    useEffect(() => {
       if (userInfo && userInfo.name) history.push(redirect);
       if (state.password === state.confirmPassword)

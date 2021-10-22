@@ -4,23 +4,47 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
    productListReducer,
    productFetchReducer,
+   productDeleteReducer,
+   productCreateReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
+// import {
+//    userLoginReducer,
+//    userProfileReducer,
+//    userRegisterReducer,
+//    userProfileUpdateReducer,
+// } from './reducers/userReducers';
 import {
-   userLoginReducer,
-   userProfileReducer,
-   userRegisterReducer,
-   userProfileUpdateReducer,
+   userReducer,
+   userDeleteReducer,
+   usersListReducer,
+   userUpdateReducer,
 } from './reducers/userReducers';
+import {
+   myOrdersReducer,
+   orderCreateReducer,
+   orderDetailsReducer,
+   orderPayReducer,
+} from './reducers/orderReducers';
 
 const reducer = combineReducers({
    productList: productListReducer,
    productDetails: productFetchReducer,
    cart: cartReducer,
-   userLogin: userLoginReducer,
-   userRegister: userRegisterReducer,
-   userProfile: userProfileReducer,
-   userProfileUpdate: userProfileUpdateReducer,
+   // userLogin: userLoginReducer,
+   // userRegister: userRegisterReducer,
+   // userProfile: userProfileReducer,
+   // userProfileUpdate: userProfileUpdateReducer,
+   user: userReducer,
+   orderCreate: orderCreateReducer,
+   orderDetails: orderDetailsReducer,
+   orderPay: orderPayReducer,
+   myOrders: myOrdersReducer,
+   usersList: usersListReducer,
+   userDelete: userDeleteReducer,
+   userUpdate: userUpdateReducer,
+   productDelete: productDeleteReducer,
+   productCreate: productCreateReducer,
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems')
@@ -37,7 +61,7 @@ const initialState = {
       cartItems: cartItemsFromLocalStorage,
       shippingAddress: shippingAddressFromLocalStorage,
    },
-   userLogin: { userInfo: userInfoFromLocalStorage },
+   user: { userInfo: userInfoFromLocalStorage },
 };
 
 const store = createStore(

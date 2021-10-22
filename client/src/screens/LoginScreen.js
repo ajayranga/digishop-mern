@@ -28,7 +28,7 @@ const LoginScreen = () => {
    };
    const initialState = { email: '', password: '' };
    const [state, dispatchLocal] = useReducer(reducer, initialState);
-   const { userInfo, loading, error } = useSelector((state) => state.userLogin);
+   const { userInfo, loading, error } = useSelector((state) => state.user);
    useEffect(() => {
       if (userInfo && userInfo.name) history.push(redirect);
    }, [userInfo, redirect, history]);
