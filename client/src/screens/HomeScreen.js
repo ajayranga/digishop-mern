@@ -14,15 +14,14 @@ const HomeScreen = () => {
       dispatch(listProducts());
    }, [dispatch]);
    return (
-      <>
-         {' '}
+      <> 
          <h1>Latest Products</h1>
          {loading ? (
             <Loader></Loader>
          ) : error ? (
             <Message variant="danger">{error}</Message>
          ) : (
-            <Row>
+            <Row className='d-flex justify-content-center align-items-center'>
                {products.map((product) => (
                   <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
                      <Product product={product} />
