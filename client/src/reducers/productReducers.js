@@ -1,18 +1,43 @@
 import * as productConstants from "../constants/productConstants";
+
 export const productListReducer = (
-  state = { products: [], loading: false, error: null },
+  state = {
+    products: [],
+    totalPages: 1,
+    pageSize: 0,
+    pageNumber: 1,
+    loading: false,
+    error: null,
+  },
   action
 ) => {
   switch (action.type) {
     case productConstants.PRODUCT_LIST_REQUEST:
-      return { ...state, products: [], loading: true };
+      return {
+        ...state,
+        products: [],
+        totalPages: 1,
+        pageSize: 0,
+        pageNumber: 1,
+        loading: true,
+      };
     case productConstants.PRODUCT_LIST_SUCCESS:
-      return { ...state, products: action.payload, loading: false };
+      return {
+        ...state,
+        products: action.payload.products,
+        totalPages: action.payload.pages,
+        pageSize: action.payload.pageSize,
+        pageNumber: action.payload.pageNumber,
+        loading: false,
+      };
     case productConstants.PRODUCT_LIST_FAIL:
       return {
         ...state,
         loading: false,
         products: [],
+        totalPages: 1,
+        pageSize: 0,
+        pageNumber: 1,
         error: action.payload,
       };
     case productConstants.PRODUCT_LIST_RESET:
@@ -21,6 +46,7 @@ export const productListReducer = (
       return { ...state };
   }
 };
+
 export const productFetchReducer = (
   state = { product: {}, loading: false, error: null, success: false },
   action
@@ -115,6 +141,66 @@ export const productUpdateReducer = (
       };
     case productConstants.PRODUCT_UPDATE_RESET:
       return { loading: false, error: null };
+    default:
+      return { ...state };
+  }
+};
+
+export const productCreateReviewReducer = (
+  state = { loading: false, error: null, success: false },
+  action
+) => {
+  switch (action.type) {
+    case productConstants.PRODUCT_CREATE_REVIEW_REQUEST:
+      return { ...state, loading: true };
+    case productConstants.PRODUCT_CREATE_REVIEW_SUCCESS:
+      return {
+        success: true,
+        loading: false,
+      };
+    case productConstants.PRODUCT_CREATE_REVIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case productConstants.PRODUCT_CREATE_REVIEW_RESET:
+      return { loading: false, error: null };
+    default:
+      return { ...state };
+  }
+};
+
+export const productTopListReducer = (
+  state = {
+    products: [],
+    loading: false,
+    error: null,
+  },
+  action
+) => {
+  switch (action.type) {
+    case productConstants.PRODUCT_TOP_FETCH_REQUEST:
+      return {
+        ...state,
+        products: [],
+        loading: true,
+      };
+    case productConstants.PRODUCT_TOP_FETCH_SUCCESS:
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+      };
+    case productConstants.PRODUCT_TOP_FETCH_FAIL:
+      return {
+        ...state,
+        loading: false,
+        products: [],
+        error: action.payload,
+      };
+    case productConstants.PRODUCT_TOP_FETCH_RESET:
+      return { ...state };
     default:
       return { ...state };
   }

@@ -4,6 +4,7 @@ import * as authMiddleware from "../middleware/authMiddleware.js";
 const Router = express.Router();
 
 Router.route("/").get(productController.fetchProducts);
+Router.route("/top").get(productController.getTopProducts);
 Router.route("/").post(
   authMiddleware.protect,
   authMiddleware.isAdmin,

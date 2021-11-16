@@ -3,8 +3,26 @@ import Product from "../database/productSchema.js";
 import mongoose from "mongoose";
 
 export const fetchProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  res.status(200).json(products);
+  const pageSize = 6;
+  const pageNumber = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+  const counts = await Product.countDocuments(keyword);
+  const products = await Product.find(keyword)
+    .limit(pageSize)
+    .skip(pageSize * (pageNumber - 1));
+  res.status(200).json({
+    products,
+    pages: Math.ceil(counts / pageSize),
+    pageSize,
+    pageNumber,
+  });
 });
 
 export const fetchProductById = asyncHandler(async (req, res) => {
@@ -95,4 +113,9 @@ export const addReviewProduct = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Product not found");
   }
+});
+
+export const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(4);
+  res.status(200).json(products);
 });

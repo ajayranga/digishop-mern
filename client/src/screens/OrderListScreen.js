@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Meta from "../components/Meta";
 import { fetchAllOrdersList } from "../actions/orderActions";
 import { ORDER_FETCH_ALL_RESET } from "../constants/orderConstants";
 
@@ -22,6 +23,7 @@ const OrderListScreen = ({ history }) => {
   }, [history, dispatch, userInfo]);
   return (
     <>
+      <Meta title="Orders list" />
       <Row className="align-items-center">
         <Col>
           <h1>Orders</h1>
